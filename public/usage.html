@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-adsense-account" content="ca-pub-6125199294054172" />
+  <title>Hướng dẫn luyện nghe chép chính tả tiếng Anh từ YouTube | English Listening</title>
+  <meta name="description" content="Hướng dẫn dùng English Listening: tải video YouTube, chép chính tả từng câu, xem gợi ý, chỉnh tốc độ, phím tắt và cách lấy phụ đề khi YouTube chặn." />
+  <link rel="canonical" href="https://betterme.site/usage.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="English Listening" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:url" content="https://betterme.site/usage.html" />
+  <meta property="og:title" content="Hướng dẫn luyện nghe chép chính tả tiếng Anh từ YouTube" />
+  <meta property="og:description" content="Cách dùng English Listening để luyện nghe tiếng Anh bằng chép chính tả với video YouTube." />
+  <meta property="og:image" content="https://betterme.site/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6125199294054172" crossorigin="anonymous"></script>
+  <style>
+    .usage { max-width: 960px; margin: 0 auto; padding: 24px; display: grid; gap: 20px; }
+    .usage h1 { margin: 0; font-size: 28px; font-weight: 900; }
+    .usage .panel p, .usage .panel li { line-height: 1.6; }
+    .usage .panel ul, .usage .panel ol { padding-left: 22px; margin: 12px 0 0; }
+    .usage .panel ol > li + li { margin-top: 16px; }
+    .usage .panel li > img { margin: 10px 0 0; }
+    .usage .panel > p { margin: 12px 0 0; }
+    .usage img { display: block; max-width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--border); margin: 0 auto; }
+    .usage img.narrow { max-width: 480px; width: 100%; }
+    .usage .ok { color: var(--ok); font-weight: 800; }
+    .usage .warn { color: var(--warn); font-weight: 800; }
+    .usage code { font-family: var(--mono); }
+    .usage .keys { margin-top: 12px; }
+    .usage a { color: var(--accent-2); }
+    .topbar { flex-wrap: nowrap; }
+    @media (max-width: 600px) {
+      .usage { padding: 16px; }
+      .topbar { gap: 12px; }
+      .brand { font-size: 17px; }
+      .topbar .btn { padding: 8px 12px; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" style="text-decoration: none">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 0 0-9 9v6a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5v-1a7 7 0 0 1 14 0v1h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3v-6a9 9 0 0 0-9-9Z"/></svg>
+      <span>English Listening</span>
+    </a>
+    <span class="spacer" style="flex: 1"></span>
+    <a class="btn btn-primary" href="./">← Back to the app</a>
+  </header>
+
+  <main class="usage">
+    <h1>Usage</h1>
+
+    <section class="panel" id="examples">
+      <div class="panel-head"><h2>Examples</h2></div>
+      <p>Open one of these videos to try the app:</p>
+      <ul>
+        <li><a href="./?v=_KvFapRkR9I">Hot Deploying Low-Latency Services for 24/7 Operation • Martin Thompson • YOW! 2022</a></li>
+        <li><a href="./?v=tM4YskS94b0">Aeron: Open-source high-performance messaging by Martin Thompson</a></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>1. Load a video</h2></div>
+      <img src="usage/topbar.png" alt="Top bar with the URL input, language picker and buttons" />
+      <ul>
+        <li>Paste a YouTube URL, pick the caption language (<b>EN</b>, <b>EN-US</b>, <b>EN-GB</b>) and click <b>Load</b>.</li>
+        <li><b>Import transcript</b> opens the import dialog (see <a href="#import">Import a transcript</a>).</li>
+        <li><b>Usage</b> opens this guide.</li>
+        <li>Videos you opened recently show up as chips under the bar, followed by <b>Example</b> videos to try. Click one to load it.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>2. Video</h2></div>
+      <img class="narrow" src="usage/video-panel.png" alt="Video panel" />
+      <ul>
+        <li>The pill at the top shows the time range of the current segment.</li>
+        <li><b>Play</b> plays the current segment, which stops by itself at the end. <b>Replay</b> plays it again from the start.</li>
+        <li>The stats show how many segments you <b>completed</b>, how many <b>words you revealed</b> and the total number of <b>segments</b>.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>3. Dictation</h2></div>
+      <img class="narrow" src="usage/dictation-panel.png" alt="Dictation panel" />
+      <ul>
+        <li><b>Easy / Normal / Hard</b> sets how much of each hidden word you see. <b>Hard</b> doesn't show how long the words are.</li>
+        <li>Toolbar: previous segment, replay, play / pause, next segment, the segment counter, playback speed (0.5x → 1.25x), <a href="#settings">settings</a> and <a href="#shortcuts">keyboard shortcuts</a>.</li>
+        <li>Type what you hear in <b>Type what you hear</b>. The word boxes check your answer as you type:
+          <ul>
+            <li><span class="ok">green</span>: correct word</li>
+            <li>letters you typed right stay visible, wrong or missing letters show as <code>*</code></li>
+            <li><span class="warn">orange</span>: a word you revealed</li>
+          </ul>
+        </li>
+        <li>Click 👁 above a word to reveal it. Revealed words count as mistakes.</li>
+        <li><b>Show all words</b> reveals the whole segment. <b>Next</b> moves on to the next segment.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>4. Transcript</h2></div>
+      <img class="narrow" src="usage/transcript-panel.png" alt="Transcript panel" />
+      <ul>
+        <li>The progress bar and percentage show how much of the video you finished.</li>
+        <li>Each card is one segment. Click a card to jump to it. Completed segments are green and the current one is blue.</li>
+        <li>Text you haven't solved is hidden. Tick <b>Show full transcript</b> to see everything.</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="import">
+      <div class="panel-head"><h2>5. Import a transcript</h2></div>
+      <img class="narrow" src="usage/import.png" alt="Import a transcript dialog" />
+      <ul>
+        <li>Drag <b>📌 Listen with English Listening</b> to your bookmarks bar, then click it on any youtube.com video page. Use this when YouTube blocks the server (see <a href="#blocked">IP got blocked?</a>).</li>
+        <li>Or paste the YouTube URL and an SRT, WebVTT or YouTube "Show transcript" text, then click <b>Use transcript</b>.</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="blocked">
+      <div class="panel-head"><h2>IP got blocked?</h2></div>
+      <p>YouTube sometimes blocks caption requests from our server. When a video won't load, you see this message:</p>
+      <img src="usage/bypass/bypass-01.png" alt="Message saying YouTube blocks our server" />
+      <p>The fix is to load the captions from your own browser with a bookmark:</p>
+      <ol>
+        <li>
+          <b>First time only:</b> click <b>Set up bookmark / paste transcript</b> (or <b>Import transcript</b> in the top bar), then drag the <b>📌 Listen with English Listening</b> button onto your browser's bookmarks bar.
+          <img src="usage/bypass/bypass-02.png" alt="Dragging the Listen with English Listening button onto the bookmarks bar" />
+        </li>
+        <li>
+          Click <b>▶ Open on YouTube</b> (or open any video on youtube.com), then click the <b>📌 Listen with Eng…</b> bookmark. The app opens with that video and its transcript.
+          <img src="usage/bypass/bypass-03.png" alt="Clicking the bookmark on a YouTube video page" />
+        </li>
+      </ol>
+      <p class="muted">Imported transcripts are saved in your browser, so the video keeps working next time without the bookmark.</p>
+    </section>
+
+    <section class="panel" id="settings">
+      <div class="panel-head"><h2>Settings</h2></div>
+      <img class="narrow" src="usage/settings.png" alt="Settings dialog" />
+      <ul>
+        <li><b>Segments</b>: practise the original caption lines, or merge them into whole sentences.</li>
+        <li><b>Padding before / after segment</b>: extra seconds played before and after each segment.</li>
+        <li><b>Auto-play when changing segment</b> / <b>Auto-advance after a segment is correct</b>.</li>
+        <li><b>Reset progress for this video</b> clears your progress for the current video.</li>
+      </ul>
+      <p class="muted">Settings and progress are saved in your browser (localStorage).</p>
+    </section>
+
+    <section class="panel" id="shortcuts">
+      <div class="panel-head"><h2>Keyboard shortcuts</h2></div>
+      <table class="keys">
+        <tr><td><kbd>Enter</kbd></td><td>Next segment when correct, otherwise replay</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>Enter</kbd></td><td>Replay segment</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>→</kbd> / <kbd>Ctrl</kbd> + <kbd>←</kbd></td><td>Next / previous segment</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>↑</kbd></td><td>Reveal the next word</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>↓</kbd></td><td>Cycle playback speed</td></tr>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="./">App</a> · <a href="usage.html">Usage</a> · <a href="privacy.html">Privacy Policy</a>
+  </footer>
+</body>
+</html>

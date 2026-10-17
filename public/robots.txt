@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# Each API call fetches captions from YouTube; nothing to index there.
+Disallow: /api/
+
+Sitemap: https://betterme.site/sitemap.xml

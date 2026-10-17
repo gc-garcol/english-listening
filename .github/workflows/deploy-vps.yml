@@ -1,0 +1,68 @@
+# Deploys to a DigitalOcean droplet on every push to main.
+# The droplet keeps a clone of this repo and runs the Node server under pm2
+# (one-time setup: see "Deploy to a VPS" in README.md).
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Secrets and variables are read from this environment (Settings → Environments),
+    # falling back to repository-level ones.
+    environment: digital-ocean
+    # Host, user, port and app dir aren't sensitive, so they can be secrets or
+    # variables. Log in with VPS_SSH_KEY (preferred) or VPS_PASSWORD, both secrets.
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST || vars.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER || vars.VPS_USER }}
+      VPS_PORT: ${{ secrets.VPS_PORT || vars.VPS_PORT || 22 }}
+      VPS_APP_DIR: ${{ secrets.VPS_APP_DIR || vars.VPS_APP_DIR }}
+      HAS_KEY: ${{ secrets.VPS_SSH_KEY != '' }}
+      HAS_PASSWORD: ${{ secrets.VPS_PASSWORD != '' }}
+    steps:
+      - name: Check configuration
+        run: |
+          missing=()
+          [ -n "$VPS_HOST" ] || missing+=(VPS_HOST)
+          [ -n "$VPS_USER" ] || missing+=(VPS_USER)
+          [ "$HAS_KEY" = true ] || [ "$HAS_PASSWORD" = true ] || missing+=("VPS_SSH_KEY or VPS_PASSWORD")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing: ${missing[*]}. Add them as secrets of the digital-ocean environment (Settings → Environments → digital-ocean)."
+            exit 1
+          fi
+
+      - name: Pull, install and restart over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ env.VPS_HOST }}
+          username: ${{ env.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ env.VPS_PORT }}
+          script_stop: true
+          script: |
+            set -e
+            APP_DIR="${{ env.VPS_APP_DIR }}"
+            APP_DIR="${APP_DIR:-$HOME/english-listening}"
+            command -v git >/dev/null || { echo "git is not installed on the VPS"; exit 1; }
+            command -v npm >/dev/null || { echo "Node.js/npm is not installed on the VPS (see README)"; exit 1; }
+            command -v pm2 >/dev/null || npm install -g pm2
+            # First deploy: clone the repo.
+            if [ ! -d "$APP_DIR/.git" ]; then
+              mkdir -p "$(dirname "$APP_DIR")"
+              git clone --depth 1 --branch main "${{ github.server_url }}/${{ github.repository }}.git" "$APP_DIR"
+            fi
+            cd "$APP_DIR"
+            git fetch --depth 1 origin main
+            git reset --hard origin/main
+            npm ci --omit=dev
+            pm2 restart english-listening --update-env || pm2 start server.js --name english-listening
+            pm2 save
