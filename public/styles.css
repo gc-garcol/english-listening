@@ -235,6 +235,7 @@ kbd { background: var(--panel-2); border: 1px solid var(--border); border-bottom
 .status.blocked { border-color: var(--warn); }
 .status.blocked ol { margin: 8px 0 12px; padding-left: 22px; color: var(--muted); }
 .status.blocked li { margin: 4px 0; }
+.status.blocked .btn-youtube { margin: 8px 0 4px; text-decoration: none; }
 .status-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .status-actions .btn { margin: 0; text-decoration: none; }
 .status .link-btn { margin: 0; border: 0; background: none; padding: 0; color: var(--accent-2); text-decoration: underline; font: inherit; }

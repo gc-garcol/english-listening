@@ -154,7 +154,7 @@ function setStatus(message, { error = false, withPaste = false } = {}) {
 
 // YouTube blocks the server's IP, so the transcript has to come from the user's browser:
 // open the video on youtube.com and click the bookmarklet there.
-function showBlocked() {
+function showBlocked(videoId) {
   const el = $('#status');
   el.hidden = false;
   el.className = 'status blocked';
@@ -162,12 +162,16 @@ function showBlocked() {
     <strong>YouTube blocks our server, so get the transcript from your browser instead:</strong>
     <ol>
       <li>First time only: <button type="button" class="link-btn" data-act="setup">add the 📌 bookmark</button> to your bookmarks bar.</li>
-      <li>Open the video on YouTube and click the 📌 bookmark. The app opens with the transcript.</li>
+      <li>
+        Open the video on YouTube and click the 📌 bookmark. The app opens with the transcript.
+        <div><a class="btn btn-primary btn-youtube" data-act="youtube" target="_blank" rel="noopener">▶ Open this video on YouTube</a></div>
+      </li>
     </ol>
     <div class="status-actions">
       <button type="button" class="btn btn-ghost" data-act="setup">Set up bookmark / paste transcript</button>
       <a class="btn btn-ghost" href="usage.html#blocked" target="_blank">IP got blocked? Read the guide →</a>
     </div>`;
+  el.querySelector('[data-act="youtube"]').href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
   el.querySelectorAll('[data-act="setup"]').forEach((b) => (b.onclick = () => openPaste({ blocked: true })));
 }
 
@@ -183,7 +187,7 @@ async function loadFromUrl(url) {
     const json = await res.json();
     if (!res.ok) {
       $('#pasteUrl').value = url;
-      if (/not a bot|blocked/i.test(json.error || '')) return showBlocked();
+      if (/not a bot|blocked/i.test(json.error || '')) return showBlocked(json.videoId);
       setStatus(json.error || 'Failed to load transcript.', { error: true, withPaste: true });
       return;
     }
