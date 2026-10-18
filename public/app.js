@@ -488,7 +488,6 @@ $('#loadForm').addEventListener('submit', (e) => {
   const url = $('#urlInput').value.trim();
   if (url) loadFromUrl(url);
 });
-$('#pasteBtn').onclick = () => openPaste();
 $('#pasteSubmit').onclick = submitPaste;
 
 $('#difficultyTabs').addEventListener('click', (e) => {

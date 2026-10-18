@@ -103,6 +103,8 @@ input, select, textarea { font: inherit; color: inherit; }
 .btn:active { transform: translateY(2px); }
 .btn:hover { filter: brightness(1.08); }
 .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 0 #3f6ea8; }
+.btn-load { background: var(--panel-2); color: var(--accent-2); border: 1px solid var(--accent); }
+.btn-load:hover { background: var(--accent); color: #fff; }
 .btn-dark { background: var(--panel-2); color: var(--text); box-shadow: 0 4px 0 #171b3a; }
 .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
 .btn-warn { background: var(--warn-bg); color: var(--warn); border: 2px solid var(--warn); box-shadow: 0 4px 0 #6e4a1d; }

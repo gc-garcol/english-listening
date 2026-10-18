@@ -19,7 +19,6 @@ Examples:
 ![topbar](public/usage/topbar.png)
 
 - Paste a YouTube URL, pick the caption language (**EN**, **EN-US**, **EN-GB**) and click **Load**.
-- **Import transcript** opens the import dialog (see [Import a transcript](#5-import-a-transcript)).
 - **Usage** opens this guide in the app: https://betterme.site/usage.html
 - Videos you opened recently show up as chips under the bar, followed by **Example** videos to try. Click one to load it.
 
@@ -161,7 +160,7 @@ npm run deploy     # → https://english-listening.<your-subdomain>.workers.dev
 
 YouTube blocks caption requests from cloud servers (Cloudflare, Vercel, …). Use the bookmarklet instead:
 
-1. In the app, click **Import transcript** and drag the **📌 Listen with English Listening** button to your bookmarks bar.
+1. In the app, drag the orange **📌 English Listening** button in the top bar to your bookmarks bar (**💡 Tutorial** shows how).
 2. Open any video on youtube.com and click the bookmark.
 
 It fetches the captions from your own browser and opens the video in the app. Imported transcripts are saved in
