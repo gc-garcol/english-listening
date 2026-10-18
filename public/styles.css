@@ -55,10 +55,10 @@ input, select, textarea { font: inherit; color: inherit; }
   70%, 100% { box-shadow: 0 4px 0 #8a5a1c, 0 0 0 10px rgba(224, 162, 74, 0); }
 }
 @media (prefers-reduced-motion: reduce) { .btn-bookmarklet { animation: none; } }
-/* Tooltip explaining how to use the bookmark (shown under the button, right-aligned). */
+/* Tooltip explaining how to use the bookmark (shown under the button, left-aligned). */
 .btn-bookmarklet[data-tip] { position: relative; }
 .btn-bookmarklet[data-tip]::after {
-  content: attr(data-tip); position: absolute; top: calc(100% + 12px); right: 0; z-index: 20;
+  content: attr(data-tip); position: absolute; top: calc(100% + 12px); left: 0; z-index: 20;
   width: max-content; max-width: 300px; padding: 10px 14px; border-radius: 12px;
   background: var(--panel-2); color: var(--text); border: 1px solid var(--warn);
   box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
@@ -66,8 +66,8 @@ input, select, textarea { font: inherit; color: inherit; }
   opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .15s, transform .15s;
 }
 .btn-bookmarklet[data-tip]:hover::after, .btn-bookmarklet[data-tip]:focus-visible::after { opacity: 1; transform: none; }
-/* Bookmarklets can't be dragged to a bookmarks bar on phones. */
-@media (max-width: 760px) { .topbar .btn-bookmarklet { display: none; } }
+/* In the brand slot of the top bar, so match the header's text size. */
+.brand .btn-bookmarklet { font-size: 16px; font-weight: 900; padding: 8px 14px; }
 .load-form select { padding: 0 10px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel); }
 
 .recent { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 24px 0; }

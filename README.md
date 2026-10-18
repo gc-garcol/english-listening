@@ -8,8 +8,7 @@ Usage guide: https://betterme.site/usage.html
 
 Examples:
 
-- [Hot Deploying Low-Latency Services for 24/7 Operation • Martin Thompson • YOW! 2022](https://betterme.site/?v=_KvFapRkR9I)
-- [Aeron: Open-source high-performance messaging by Martin Thompson](https://betterme.site/?v=tM4YskS94b0)
+- [Toy Story 3 Official Trailer • Pixar](https://betterme.site/?v=2BlMNH1QTeE)
 
 ![app](docs/app.png)
 

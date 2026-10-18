@@ -8,10 +8,7 @@ const EYE_SVG =
 const PLAY_PATH = '<path d="M7 4v16l13-8z"/>';
 const PAUSE_PATH = '<path d="M7 4h3v16H7zM14 4h3v16h-3z"/>';
 // Shown after the recent videos so new users have something to try.
-const EXAMPLES = [
-  { videoId: '_KvFapRkR9I', title: 'Hot Deploying Low-Latency Services for 24/7 Operation • Martin Thompson' },
-  { videoId: 'tM4YskS94b0', title: 'Aeron: Open-source high-performance messaging by Martin Thompson' },
-];
+const EXAMPLES = [{ videoId: '2BlMNH1QTeE', title: 'Toy Story 3 Official Trailer • Pixar' }];
 
 // ---------------------------------------------------------------- storage
 const store = {
