@@ -296,3 +296,81 @@ kbd { background: var(--panel-2); border: 1px solid var(--border); border-bottom
 .intro .faq summary { cursor: pointer; font-weight: 800; }
 .intro .faq p { margin: 8px 0 0; color: var(--muted); line-height: 1.6; }
 @media (max-width: 760px) { .intro { padding: 16px; } }
+
+/* Tutorial button in the top bar: bright outline, plus a pulsing dot until first opened. */
+.btn-tutorial {
+  position: relative; background: rgba(127, 176, 236, .14); color: var(--accent-2);
+  border: 2px solid var(--accent-2); white-space: nowrap;
+}
+.btn-tutorial:hover { background: var(--accent-2); color: #10142c; }
+.btn-tutorial.unseen::after {
+  content: ''; position: absolute; top: -4px; right: -4px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--warn); box-shadow: 0 0 0 0 rgba(224, 162, 74, .7); animation: tutorial-ping 1.8s ease-out infinite;
+}
+@keyframes tutorial-ping { 70%, 100% { box-shadow: 0 0 0 8px rgba(224, 162, 74, 0); } }
+@media (prefers-reduced-motion: reduce) { .btn-tutorial.unseen::after { animation: none; } }
+
+/* Bookmark tutorial dialog: 2 slides with a drawn browser window */
+.tutorial h4 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 16px; }
+.tutorial .slide p { margin: 12px 0 0; line-height: 1.5; font-size: 14px; }
+.tutorial .slide > .btn { margin-top: 12px; }
+.step-num { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--warn); color: #2a1a05; font-weight: 900; }
+.tutorial-nav { align-items: center; }
+.tutorial-nav .dots { margin-right: auto; display: flex; gap: 8px; }
+.tutorial-nav .dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: var(--border); cursor: pointer; }
+.tutorial-nav .dots button.active { background: var(--warn); width: 24px; border-radius: 5px; }
+.tutorial-nav .btn:disabled { opacity: .4; cursor: default; }
+
+/* The drawn browser is a fixed 440x240 canvas, scaled down on small screens. */
+.bw-wrap { width: 100%; display: flex; justify-content: center; }
+.bw { position: relative; width: 440px; height: 240px; flex: none; border: 2px solid var(--border); border-radius: 12px; overflow: hidden; background: #f4f5fb; color: #2b2f4a; font-size: 12px; font-weight: 700; }
+.bw-tabs { height: 28px; padding: 5px 10px 0; background: #d9dcec; display: flex; }
+.bw-tab { padding: 4px 14px; border-radius: 8px 8px 0 0; background: #f4f5fb; font-size: 11px; }
+.bw-toolbar { height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 10px; background: #f4f5fb; }
+.bw-nav { color: #8a8fb0; letter-spacing: 4px; }
+.bw-url { flex: 1; padding: 5px 12px; border-radius: 999px; background: #e6e8f3; color: #4a4f72; font-family: var(--mono); font-size: 11px; }
+.bw-bookmarks { position: relative; z-index: 1; height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 10px; background: #fff; border-top: 1px solid #e3e5f0; border-bottom: 2px solid #e3e5f0; }
+.bw-bm { padding: 3px 8px; border-radius: 6px; color: #4a4f72; font-size: 11px; }
+.bw-drop { width: 140px; padding: 2px 8px; border: 2px dashed var(--warn); border-radius: 6px; color: var(--warn); font-size: 11px; text-align: center; animation: drop-pulse 2.6s infinite; }
+.bw-tag { margin-left: auto; color: #c47a12; font-size: 11px; font-weight: 900; }
+.bw-page { position: relative; height: 146px; background: var(--bg); }
+.bw-page-text { position: absolute; left: 44px; top: 54px; color: var(--muted); font-size: 12px; }
+.bw-arrow { position: absolute; inset: 0; width: 440px; height: 240px; pointer-events: none; }
+.bw-arrow path:first-of-type { animation: arrow-dash 1s linear infinite; }
+.bw .bw-source { position: absolute; left: 40px; top: 178px; font-size: 13px; padding: 6px 12px; z-index: 2; }
+.bw-ghost {
+  position: absolute; left: 40px; top: 178px; z-index: 3; padding: 6px 12px; border-radius: 12px; pointer-events: none;
+  background: rgba(240, 180, 90, .85); color: #2a1a05; font-size: 13px; font-weight: 800; white-space: nowrap;
+  animation: ghost-drag 2.6s ease-in-out infinite;
+}
+.bw-ghost::after { content: '✋'; position: absolute; right: -10px; bottom: -12px; font-size: 18px; }
+@keyframes ghost-drag {
+  0%, 12% { left: 40px; top: 178px; opacity: 0; transform: scale(1); }
+  20% { opacity: 1; }
+  70% { left: 222px; top: 64px; opacity: 1; transform: scale(.85); }
+  85%, 100% { left: 222px; top: 64px; opacity: 0; transform: scale(.85); }
+}
+@keyframes drop-pulse { 60%, 80% { background: rgba(224, 162, 74, .25); } }
+@keyframes arrow-dash { to { stroke-dashoffset: -14; } }
+
+/* Step 2: YouTube page with the saved bookmark being clicked. */
+.bw-mine { position: relative; background: var(--warn); color: #2a1a05; font-weight: 900; animation: bm-click 1.6s infinite; }
+.bw-cursor { position: absolute; right: -6px; top: 10px; font-size: 20px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.5)); animation: cursor-tap 1.6s infinite; }
+@keyframes bm-click { 45%, 55% { box-shadow: 0 0 0 4px rgba(224, 162, 74, .45); } }
+@keyframes cursor-tap { 0%, 100% { transform: translate(8px, 10px); } 45%, 55% { transform: translate(0, 0) scale(.9); } }
+.bw-yt { display: flex; gap: 12px; padding: 12px; background: #0f0f0f; }
+.yt-player { flex: 1.6; border-radius: 8px; background: linear-gradient(135deg, #3b3b3b, #1a1a1a); display: grid; place-items: center; }
+.yt-play { width: 44px; height: 30px; border-radius: 8px; background: #ff0033; color: #fff; display: grid; place-items: center; font-size: 14px; }
+.yt-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
+.yt-lines i { height: 10px; border-radius: 4px; background: #303030; }
+.yt-lines i:nth-child(2) { width: 70%; }
+.yt-lines i:nth-child(3) { width: 45%; }
+
+@media (max-width: 560px) {
+  .bw-wrap { height: 180px; }
+  .bw { transform: scale(.75); transform-origin: top center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bw-ghost, .bw-drop, .bw-arrow path, .bw-mine, .bw-cursor { animation: none; }
+  .bw-ghost { display: none; }
+}

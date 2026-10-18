@@ -102,6 +102,7 @@
       </select>
       <button type="submit" class="btn btn-primary">Load</button>
       <button type="button" id="pasteBtn" class="btn btn-ghost" title="Import a transcript (bookmarklet, SRT / VTT / YouTube transcript text)">Import transcript</button>
+      <button type="button" id="tutorialBtn" class="btn btn-tutorial" title="How to load any YouTube video with the 📌 bookmark">💡 Tutorial</button>
       <a class="btn btn-ghost" href="usage.html" target="_blank" title="How to use this app">Usage</a>
     </form>
   </header>
@@ -271,6 +272,66 @@
   </dialog>
 
   <!-- Shortcuts dialog -->
+  <!-- Bookmark tutorial dialog: 2 slides -->
+  <dialog id="tutorialDlg" class="dlg dlg-wide tutorial">
+    <form method="dialog">
+      <h3>Load any YouTube video in 2 steps</h3>
+
+      <div class="slides">
+        <section class="slide" data-step="1">
+          <h4><span class="step-num">1</span> Drag the 📌 button up to your bookmarks bar</h4>
+          <div class="bw-wrap">
+            <div class="bw">
+              <div class="bw-tabs"><span class="bw-tab">🎧 English Listening</span></div>
+              <div class="bw-toolbar"><span class="bw-nav">← → ⟳</span><span class="bw-url">🔒 betterme.site</span><span class="bw-nav">☆</span></div>
+              <div class="bw-bookmarks">
+                <span class="bw-bm">📁 Work</span><span class="bw-bm">📁 News</span>
+                <span class="bw-drop">drop here</span>
+                <span class="bw-tag">← Bookmarks bar</span>
+              </div>
+              <div class="bw-page"><span class="bw-page-text">Drag me ↓</span></div>
+              <svg class="bw-arrow" viewBox="0 0 440 240" aria-hidden="true">
+                <defs><marker id="tutArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e0a24a"/></marker></defs>
+                <path d="M130 176 C 120 120, 250 150, 292 96" fill="none" stroke="#e0a24a" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#tutArrow)"/>
+              </svg>
+              <span class="bw-ghost" aria-hidden="true">📌 English Listening</span>
+              <a class="btn btn-bookmarklet bookmarklet-link bw-source" href="#" draggable="true" onclick="return false" title="Drag me to the bookmarks bar">📌 English Listening</a>
+            </div>
+          </div>
+          <p>Drag the orange <b>📌 English Listening</b> button (above, or the one in the top bar) and drop it on the bookmarks bar. You only do this once.</p>
+          <p class="muted">Don't see the bookmarks bar? Press <kbd>Ctrl</kbd> / <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>.</p>
+        </section>
+
+        <section class="slide" data-step="2" hidden>
+          <h4><span class="step-num">2</span> On a YouTube video, click the bookmark</h4>
+          <div class="bw-wrap">
+            <div class="bw">
+              <div class="bw-tabs"><span class="bw-tab">▶ YouTube</span></div>
+              <div class="bw-toolbar"><span class="bw-nav">← → ⟳</span><span class="bw-url">🔒 youtube.com/watch?v=…</span><span class="bw-nav">☆</span></div>
+              <div class="bw-bookmarks">
+                <span class="bw-bm">📁 Work</span><span class="bw-bm">📁 News</span>
+                <span class="bw-bm bw-mine">📌 English Listening<span class="bw-cursor">👆</span></span>
+                <span class="bw-tag">← Click!</span>
+              </div>
+              <div class="bw-page bw-yt">
+                <div class="yt-player"><span class="yt-play">▶</span></div>
+                <div class="yt-lines"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+          <p>Open the video on youtube.com and click <b>📌 English Listening</b> in the bookmarks bar. This app opens with the video and its transcript, ready to practise.</p>
+          <a class="btn btn-ghost" id="tutorialYoutube" href="https://www.youtube.com/watch?v=2BlMNH1QTeE" target="_blank" rel="noopener">▶ Try it on a YouTube video</a>
+        </section>
+      </div>
+
+      <div class="dlg-actions tutorial-nav">
+        <div class="dots"><button type="button" data-go="0" aria-label="Step 1"></button><button type="button" data-go="1" aria-label="Step 2"></button></div>
+        <button type="button" class="btn btn-ghost" id="tutorialPrev">← Back</button>
+        <button type="button" class="btn btn-primary" id="tutorialNext">Next →</button>
+      </div>
+    </form>
+  </dialog>
+
   <dialog id="keysDlg" class="dlg">
     <form method="dialog">
       <h3>Keyboard shortcuts</h3>

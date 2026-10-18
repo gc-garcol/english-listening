@@ -505,6 +505,39 @@ $('#nextBtn').onclick = () => goTo(progress.idx + 1);
 $('#nextBigBtn').onclick = () => goTo(progress.idx + 1);
 $('#speedBtn').onclick = cycleSpeed;
 $('#keysBtn').onclick = () => $('#keysDlg').showModal();
+$('#tutorialBtn').onclick = () => {
+  // Point "Try it" at the video the user is on, if any.
+  const id = data?.videoId || extractVideoId($('#urlInput').value.trim()) || EXAMPLES[0].videoId;
+  $('#tutorialYoutube').href = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+  showTutorialStep(0);
+  $('#tutorialDlg').showModal();
+  store.set('tutorialSeen', true);
+  $('#tutorialBtn').classList.remove('unseen');
+};
+// Pulse the Tutorial button until it has been opened once.
+if (!store.get('tutorialSeen', false)) $('#tutorialBtn').classList.add('unseen');
+
+let tutorialStep = 0;
+function showTutorialStep(i) {
+  const slides = document.querySelectorAll('#tutorialDlg .slide');
+  tutorialStep = Math.max(0, Math.min(i, slides.length - 1));
+  slides.forEach((el, k) => (el.hidden = k !== tutorialStep));
+  document.querySelectorAll('#tutorialDlg .dots button').forEach((d, k) => d.classList.toggle('active', k === tutorialStep));
+  $('#tutorialPrev').disabled = tutorialStep === 0;
+  $('#tutorialNext').textContent = tutorialStep === slides.length - 1 ? 'Got it' : 'Next →';
+}
+$('#tutorialPrev').onclick = () => showTutorialStep(tutorialStep - 1);
+$('#tutorialNext').onclick = () => {
+  if (tutorialStep === document.querySelectorAll('#tutorialDlg .slide').length - 1) $('#tutorialDlg').close();
+  else showTutorialStep(tutorialStep + 1);
+};
+$('#tutorialDlg .dots').onclick = (e) => {
+  if (e.target.dataset.go) showTutorialStep(Number(e.target.dataset.go));
+};
+$('#tutorialDlg').addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') showTutorialStep(tutorialStep + 1);
+  else if (e.key === 'ArrowLeft') showTutorialStep(tutorialStep - 1);
+});
 $('#showAllBtn').onclick = () => {
   const { states } = compare(tokens, $('#answer').value);
   reveal(states.map((s, i) => (s.state === 'static' || s.state === 'correct' ? -1 : i)).filter((i) => i >= 0));
