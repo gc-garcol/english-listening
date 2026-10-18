@@ -4,6 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google-adsense-account" content="ca-pub-6125199294054172" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <title>Luyện nghe tiếng Anh chép chính tả từ YouTube (Dictation) miễn phí | English Listening</title>
   <meta name="description" content="Luyện nghe tiếng Anh online miễn phí bằng cách chép chính tả (dictation) với bất kỳ video YouTube nào. Không cần đăng ký, không cần cài đặt. Nghe từng câu, gõ lại và được chấm từng từ — phù hợp luyện IELTS, TOEIC, giao tiếp." />
   <link rel="canonical" href="https://betterme.site/" />
@@ -99,6 +103,7 @@
       <button type="submit" class="btn btn-primary">Load</button>
       <button type="button" id="pasteBtn" class="btn btn-ghost" title="Import a transcript (bookmarklet, SRT / VTT / YouTube transcript text)">Import transcript</button>
       <a class="btn btn-ghost" href="usage.html" target="_blank" title="How to use this app">Usage</a>
+      <a class="btn btn-bookmarklet bookmarklet-link" href="#" draggable="true" aria-label="Bookmark: drag to your bookmarks bar, then click it on any YouTube video to open it here" data-tip="① Drag me to your bookmarks bar.&#10;② Open any YouTube video and click the bookmark — it opens here with the transcript, even when YouTube blocks our server.">📌 English Listening</a>
     </form>
   </header>
 
@@ -292,7 +297,7 @@
       </p>
       <div class="bookmarklet-box">
         <p><strong>Easiest:</strong> drag this button to your bookmarks bar (once):</p>
-        <a id="bookmarklet" class="btn btn-primary" href="#" onclick="return false" title="Drag me to the bookmarks bar">📌 Listen with English Listening</a>
+        <a id="bookmarklet" class="btn btn-primary bookmarklet-link" href="#" onclick="return false" title="Drag me to the bookmarks bar">📌 Listen with English Listening</a>
         <p class="muted">Then open any video on youtube.com and click the bookmark. It fetches the captions from your own browser (not our server, which YouTube may block) and opens the video here.</p>
       </div>
       <p class="muted"><strong>Or paste a transcript:</strong> SRT, WebVTT, or text copied from YouTube's “Show transcript” panel (timestamp line followed by text).</p>

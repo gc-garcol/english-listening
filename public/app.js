@@ -232,17 +232,34 @@ function renderRecent() {
     const b = document.createElement('button');
     b.textContent = r.title;
     b.title = r.title;
-    if (examples.includes(r)) {
-      b.className = 'example';
-      b.title = 'Example: ' + r.title;
-    }
     b.onclick = () => {
       const url = `https://www.youtube.com/watch?v=${r.videoId}`;
       $('#urlInput').value = url;
       loadFromUrl(url);
     };
-    el.append(b);
+    if (examples.includes(r)) {
+      b.className = 'example';
+      b.title = 'Example: ' + r.title;
+      el.append(b);
+      continue;
+    }
+    const item = document.createElement('span');
+    item.className = 'recent-item';
+    const x = document.createElement('button');
+    x.className = 'recent-remove';
+    x.type = 'button';
+    x.textContent = '×';
+    x.title = 'Remove from recent';
+    x.setAttribute('aria-label', 'Remove ' + r.title + ' from recent');
+    x.onclick = () => removeRecent(r.videoId);
+    item.append(b, x);
+    el.append(item);
   }
+}
+
+function removeRecent(videoId) {
+  store.set('recent', store.get('recent', []).filter((r) => r.videoId !== videoId));
+  renderRecent();
 }
 
 // ---------------------------------------------------------------- segments
@@ -581,8 +598,14 @@ async function setupBookmarklet() {
   const src = await (await fetch('bookmarklet.js')).text();
   const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   const app = local ? location.origin + location.pathname : APP_URL;
-  $('#bookmarklet').href = 'javascript:' + encodeURIComponent(src.replaceAll('__APP__', app));
+  const href = 'javascript:' + encodeURIComponent(src.replaceAll('__APP__', app));
+  document.querySelectorAll('.bookmarklet-link').forEach((a) => (a.href = href));
 }
+// The header bookmark is meant to be dragged; a plain click explains how to use it.
+document.querySelector('.topbar .bookmarklet-link').onclick = (e) => {
+  e.preventDefault();
+  openPaste();
+};
 
 // ---------------------------------------------------------------- boot
 setDifficulty(settings.difficulty);
