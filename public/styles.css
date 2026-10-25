@@ -124,8 +124,28 @@ input, select, textarea { font: inherit; color: inherit; }
   .layout { grid-template-columns: 1fr 1fr; }
   .transcript-panel { grid-column: 1 / -1; }
 }
+/* Wide mode: video + dictation side by side (video width set by dragging the
+   divider), transcript full width below. */
+.resizer { display: none; }
+.layout.wide { grid-template-columns: var(--video-w, minmax(320px, 1.5fr)) 20px minmax(360px, 1fr); column-gap: 0; }
+.layout.wide .resizer {
+  display: block; align-self: stretch; cursor: col-resize; touch-action: none; position: relative;
+}
+.layout.wide .resizer::after {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 6px; height: 64px;
+  transform: translate(-50%, -50%); border-radius: 999px; background: var(--border); transition: background .15s;
+}
+.layout.wide .resizer:hover::after, .layout.resizing .resizer::after { background: var(--accent); }
+.layout.resizing { user-select: none; cursor: col-resize; }
+.layout.resizing iframe { pointer-events: none; }
+.layout.wide .transcript-panel { grid-column: 1 / -1; }
+.layout.wide .segments { max-height: 60vh; }
+#wideBtn[aria-pressed="true"] { color: var(--accent-2); background: var(--panel-2); }
+.video-panel .panel-head { gap: 8px; }
 @media (max-width: 760px) {
-  .layout { grid-template-columns: 1fr; padding: 16px; }
+  .layout, .layout.wide { grid-template-columns: 1fr; padding: 16px; }
+  .layout.wide .resizer { display: none; }
+  #wideBtn { display: none; }
   .topbar, .recent { padding-left: 16px; padding-right: 16px; }
 }
 

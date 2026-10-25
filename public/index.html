@@ -115,7 +115,9 @@
     <section class="panel video-panel">
       <div class="panel-head">
         <h2>Video</h2>
+        <span class="spacer"></span>
         <span class="pill" id="segTime">0:00</span>
+        <button class="icon-btn" id="wideBtn" title="Wide video (drag the divider to resize)" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div>
       <div class="video-frame"><div id="player"></div></div>
       <h3 class="video-title" id="videoTitle"></h3>
@@ -138,6 +140,8 @@
         <div><span id="statTotal">0</span><small>segments</small></div>
       </div>
     </section>
+
+    <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" title="Drag to resize the video (double-click to reset)"></div>
 
     <!-- DICTATION -->
     <section class="panel dictation-panel">

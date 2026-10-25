@@ -43,6 +43,7 @@ const settings = {
   autoNext: false,
   speed: 1,
   showTranscript: false,
+  wide: false,
   ...store.get('settings', {}),
 };
 const saveSettings = () => store.set('settings', settings);
@@ -551,6 +552,42 @@ $('#showTranscript').onchange = (e) => {
   updateTranscriptItems();
 };
 
+// Wide video: transcript moves below, and the divider sets the video width.
+function setWide(wide) {
+  settings.wide = wide;
+  $('#app').classList.toggle('wide', wide);
+  $('#wideBtn').setAttribute('aria-pressed', wide);
+  $('#app').style.setProperty('--video-w', wide && settings.videoWidth ? settings.videoWidth + 'px' : '');
+}
+$('#wideBtn').onclick = () => {
+  setWide(!settings.wide);
+  saveSettings();
+};
+$('#resizer').addEventListener('pointerdown', (e) => {
+  const app = $('#app');
+  const left = $('.video-panel').getBoundingClientRect().left;
+  const max = app.getBoundingClientRect().right - left - 20 - 360 - 24; // keep room for the dictation panel
+  const resizer = e.currentTarget;
+  resizer.setPointerCapture(e.pointerId);
+  app.classList.add('resizing');
+  const move = (ev) => {
+    settings.videoWidth = Math.round(Math.min(Math.max(ev.clientX - left - 10, 320), max));
+    app.style.setProperty('--video-w', settings.videoWidth + 'px');
+  };
+  const up = () => {
+    app.classList.remove('resizing');
+    resizer.removeEventListener('pointermove', move);
+    saveSettings();
+  };
+  resizer.addEventListener('pointermove', move);
+  resizer.addEventListener('lostpointercapture', up, { once: true });
+});
+$('#resizer').ondblclick = () => {
+  delete settings.videoWidth;
+  setWide(true);
+  saveSettings();
+};
+
 $('#answer').addEventListener('input', onInput);
 document.addEventListener('keydown', (e) => {
   if (!data || document.querySelector('dialog[open]')) return;
@@ -638,6 +675,7 @@ document.querySelector('.topbar .bookmarklet-link').onclick = (e) => {
 
 // ---------------------------------------------------------------- boot
 setDifficulty(settings.difficulty);
+setWide(!!settings.wide);
 $('#speedLabel').textContent = settings.speed + 'x';
 renderRecent();
 setupBookmarklet();
