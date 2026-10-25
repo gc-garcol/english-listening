@@ -130,24 +130,15 @@
       </div>
       <div class="video-frame"><div id="player"></div></div>
       <h3 class="video-title" id="videoTitle"></h3>
-      <h4 class="label">Controls</h4>
-      <div class="big-controls">
-        <button class="btn btn-reset btn-lg" id="resetBtn" title="Reset progress for this video (click twice)">
-          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>
-          <span class="reset-label">Reset progress</span><span class="reset-confirm">Click again</span>
-        </button>
-        <button class="btn btn-primary btn-lg" id="startBtn">
-          <svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg> Play
-        </button>
-        <button class="btn btn-dark btn-lg" id="replayBtn2">
-          <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></svg> Replay
-        </button>
-      </div>
       <div class="stats">
         <div><span id="statDone">0</span><small>completed</small></div>
         <div><span id="statRevealed">0</span><small>words revealed</small></div>
         <div><span id="statTotal">0</span><small>segments</small></div>
       </div>
+      <button class="reset-link" id="resetBtn" title="Reset progress for this video (click twice)">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>
+        <span class="reset-label">Reset progress</span><span class="reset-confirm">Click again to reset</span>
+      </button>
     </section>
 
     <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" title="Drag to resize the video (double-click to reset)"></div>
@@ -161,13 +152,13 @@
       </div>
 
       <div class="toolbar">
-        <button class="icon-btn" id="prevBtn" title="Previous (Ctrl + ←)"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button class="icon-btn" id="replayBtn" title="Replay (Ctrl + Enter)"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg></button>
+        <button class="icon-btn" id="prevBtn" title="Previous segment" data-kbd="Ctrl+←"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="icon-btn" id="replayBtn" title="Replay" data-kbd="Ctrl+Enter"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg></button>
         <button class="icon-btn" id="playBtn" title="Play / Pause"><svg viewBox="0 0 24 24" id="playIcon"><path d="M7 4v16l13-8z"/></svg></button>
-        <button class="icon-btn" id="nextBtn" title="Next (Ctrl + →)"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="icon-btn" id="nextBtn" title="Next segment" data-kbd="Ctrl+→"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
         <span class="seg-counter" id="segCounter">#1 / 1</span>
         <span class="spacer"></span>
-        <button class="icon-btn speed" id="speedBtn" title="Playback speed"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span id="speedLabel">1x</span></button>
+        <button class="icon-btn speed" id="speedBtn" title="Playback speed" data-kbd="Ctrl+↓"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span id="speedLabel">1x</span></button>
         <button class="icon-btn" id="settingsBtn" title="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68 1.65 1.65 0 0 0 10 3.17V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
         <button class="icon-btn" id="keysBtn" title="Keyboard shortcuts"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></button>
       </div>
@@ -182,8 +173,16 @@
 
       <div class="result" id="result" hidden></div>
 
-      <button class="btn btn-warn btn-block" id="showAllBtn">Show all words</button>
-      <button class="btn btn-primary btn-block" id="nextBigBtn">Next <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="btn btn-warn btn-block" id="showAllBtn" title="Reveal just the next word" data-kbd="Ctrl+↑">Show all words</button>
+      <div class="action-bar">
+        <button class="btn btn-dark btn-lg" id="startBtn" title="Play this segment" data-kbd="Ctrl+Enter">
+          <svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg> Play
+        </button>
+        <button class="btn btn-dark btn-lg" id="replayBtn2" title="Replay this segment" data-kbd="Ctrl+Enter">
+          <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></svg> Replay
+        </button>
+        <button class="btn btn-primary btn-lg" id="nextBigBtn" title="Next segment" data-kbd="Ctrl+→">Next <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
     </section>
 
     <!-- TRANSCRIPT -->

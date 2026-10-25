@@ -280,7 +280,18 @@ function goTo(i, { play = settings.autoplay } = {}) {
   $('#segTime').textContent = `${fmt(seg.start)} – ${fmt(seg.end)}`;
   renderWords();
   updateTranscriptItems();
-  document.querySelector(`#segments li[data-i="${i}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  const item = document.querySelector(`#segments li[data-i="${i}"]`);
+  if (item && settings.wide) {
+    // The transcript sits below the video here, so scroll only inside the
+    // list: scrollIntoView would also scroll the page down to it.
+    const list = $('#segments');
+    const top = item.offsetTop - list.offsetTop;
+    if (top < list.scrollTop || top + item.offsetHeight > list.scrollTop + list.clientHeight) {
+      list.scrollTo({ top: top - (list.clientHeight - item.offsetHeight) / 2, behavior: 'smooth' });
+    }
+  } else {
+    item?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
   $('#answer').focus();
   if (play) {
     playSegment();
@@ -588,6 +599,47 @@ $('#resizer').ondblclick = () => {
   saveSettings();
 };
 
+// Tooltips for the app's buttons: the title as a label, plus the keyboard
+// shortcut from data-kbd ("Ctrl+Enter") drawn as keys. Replaces the native
+// title tooltip so it shows at once and looks the same everywhere.
+const tip = document.createElement('div');
+tip.className = 'tip';
+tip.setAttribute('role', 'tooltip');
+tip.hidden = true;
+document.body.append(tip);
+document.querySelectorAll('#app [title]').forEach((el) => {
+  el.dataset.tip = el.title;
+  if (!el.getAttribute('aria-label') && !el.textContent.trim()) el.setAttribute('aria-label', el.title);
+  el.removeAttribute('title');
+});
+function showTip(el) {
+  const keys = el.dataset.kbd ? el.dataset.kbd.split('+').map((k) => `<kbd>${k}</kbd>`).join('+') : '';
+  tip.innerHTML = `<span>${el.dataset.tip}</span>${keys ? `<span class="tip-keys">${keys}</span>` : ''}`;
+  tip.hidden = false;
+  const r = el.getBoundingClientRect();
+  const w = tip.offsetWidth;
+  const h = tip.offsetHeight;
+  const left = Math.min(Math.max(r.left + r.width / 2 - w / 2, 8), innerWidth - w - 8);
+  const top = r.top - h - 8 < 8 ? r.bottom + 8 : r.top - h - 8; // flip below near the top edge
+  tip.style.left = left + scrollX + 'px';
+  tip.style.top = top + scrollY + 'px';
+}
+const hideTip = () => (tip.hidden = true);
+$('#app').addEventListener('pointerover', (e) => {
+  const el = e.target.closest('[data-tip]');
+  if (el && e.pointerType === 'mouse') showTip(el);
+});
+$('#app').addEventListener('pointerout', (e) => {
+  if (e.target.closest('[data-tip]') && !e.relatedTarget?.closest?.('[data-tip]')) hideTip();
+});
+$('#app').addEventListener('focusin', (e) => {
+  const el = e.target.closest('[data-tip]');
+  if (el?.matches(':focus-visible')) showTip(el);
+});
+$('#app').addEventListener('focusout', hideTip);
+document.addEventListener('pointerdown', hideTip);
+addEventListener('scroll', hideTip, { passive: true });
+
 $('#answer').addEventListener('input', onInput);
 document.addEventListener('keydown', (e) => {
   if (!data || document.querySelector('dialog[open]')) return;
@@ -644,7 +696,7 @@ $('#resetProgress').onclick = () => {
   $('#settingsDlg').close();
   resetProgress();
 };
-// Sits next to Play, so it takes two clicks: the first arms it for a few seconds.
+// Destructive, so it takes two clicks: the first arms it for a few seconds.
 let resetArmTimer = null;
 $('#resetBtn').onclick = () => {
   const btn = $('#resetBtn');

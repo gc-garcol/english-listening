@@ -169,17 +169,24 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 .video-frame iframe, .video-frame #player { position: absolute; inset: 0; width: 100%; height: 100%; }
 .video-title { font-size: 15px; color: var(--muted); margin: 12px 2px 0; font-weight: 700; }
-.big-controls { display: grid; grid-template-columns: auto 1fr 1fr; gap: 14px; }
-/* Compact and stacked so Play / Replay keep most of the row. */
-.big-controls .btn-reset {
-  flex-direction: column; gap: 4px; padding: 8px 10px; font-size: 11px; line-height: 1.15; letter-spacing: .04em;
-  max-width: 96px; text-align: center;
-  background: transparent; color: var(--bad); border: 2px solid var(--bad); box-shadow: 0 4px 0 #8a2f39;
+/* Bottom of the dictation panel: Play / Replay next to the main Next action. */
+.action-bar {
+  display: grid; grid-template-columns: auto auto 1fr; gap: 12px;
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
 }
-.btn-reset svg { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.btn-reset .reset-confirm, .btn-reset.confirm .reset-label { display: none; }
-.btn-reset.confirm { background: var(--bad); color: #fff; }
-.btn-reset.confirm .reset-confirm { display: inline; }
+.action-bar #startBtn svg path { fill: currentColor; }
+.action-bar .btn-lg { padding: 15px 16px; }
+/* Rarely used and destructive, so a small link that takes two clicks. */
+.reset-link {
+  display: flex; width: fit-content; align-items: center; gap: 6px; margin: 14px 0 0 auto;
+  border: 0; border-radius: 8px; padding: 4px 8px; background: transparent;
+  color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.reset-link:hover { color: var(--bad); }
+.reset-link svg { width: 16px; height: 16px; }
+.reset-link .reset-confirm, .reset-link.confirm .reset-label { display: none; }
+.reset-link.confirm { background: var(--bad); color: #fff; }
+.reset-link.confirm .reset-confirm { display: inline; }
 .stats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
   margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); text-align: center;
@@ -284,6 +291,17 @@ input, select, textarea { font: inherit; color: inherit; }
 .keys td { padding: 7px 4px; border-bottom: 1px solid var(--border); }
 .keys td:first-child { white-space: nowrap; width: 1%; padding-right: 16px; }
 kbd { background: var(--panel-2); border: 1px solid var(--border); border-bottom-width: 3px; border-radius: 6px; padding: 1px 7px; font-family: var(--mono); font-size: 13px; }
+
+/* Hover tooltip with the button's keyboard shortcut (see showTip in app.js). */
+.tip {
+  position: absolute; z-index: 50; pointer-events: none; max-width: 260px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--border); border-radius: 10px;
+  padding: 6px 10px; font-size: 13px; font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.tip[hidden] { display: none; }
+.tip-keys { display: inline-flex; align-items: center; gap: 3px; color: var(--muted); white-space: nowrap; }
+.tip kbd { background: var(--panel); color: var(--text); font-size: 12px; padding: 0 6px; }
 .blocked-note { border: 1px solid var(--warn); border-radius: 14px; padding: 12px 16px; margin: 0 0 16px; line-height: 1.5; }
 .blocked-note a { display: inline-block; margin-top: 6px; color: var(--accent-2); font-weight: 700; }
 .bookmarklet-box { border: 1px dashed var(--accent); border-radius: 14px; padding: 12px 16px; margin-bottom: 16px; }
