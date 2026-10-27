@@ -414,3 +414,33 @@ kbd { background: var(--panel-2); border: 1px solid var(--border); border-bottom
   .bw-ghost, .bw-drop, .bw-arrow path, .bw-mine, .bw-cursor { animation: none; }
   .bw-ghost { display: none; }
 }
+
+/* Content pages (about, terms, blog) */
+.usage { max-width: 860px; margin: 0 auto; padding: 24px; display: grid; gap: 20px; }
+.usage h1 { margin: 0; font-size: clamp(24px, 4vw, 32px); font-weight: 900; line-height: 1.25; }
+.usage a { color: var(--accent-2); }
+.prose .panel h1 { margin-bottom: 6px; }
+.prose .panel h2, .post-card h2 { margin: 28px 0 10px; font-size: 21px; font-weight: 900; text-transform: none; letter-spacing: normal; }
+.prose .panel > h2:first-child { margin-top: 0; }
+.prose .panel h3 { margin: 20px 0 8px; font-size: 17px; font-weight: 800; }
+.prose p, .prose li { line-height: 1.75; font-size: 16.5px; }
+.prose ul, .prose ol { padding-left: 22px; }
+.prose blockquote { margin: 14px 0; padding: 10px 16px; border-left: 4px solid var(--accent); background: var(--panel-2); border-radius: 8px; }
+.prose code, .prose .ex { font-family: var(--mono); font-size: 14.5px; background: var(--panel-2); padding: 1px 6px; border-radius: 6px; }
+.prose table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; display: block; overflow-x: auto; }
+.prose th, .prose td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+.prose th { background: var(--panel-2); }
+.prose .lead { margin: 0; font-size: 17px; line-height: 1.6; }
+.crumbs { font-size: 14px; }
+.post-list { display: grid; gap: 14px; }
+.post-card { display: block; text-decoration: none; color: var(--text); }
+.post-card:hover { border-color: var(--accent); }
+.prose .post-card h2 { margin: 0 0 6px; font-size: 19px; font-weight: 900; color: var(--accent-2); }
+.prose .post-card p { margin: 0 0 8px; color: var(--text); }
+.page-topbar { flex-wrap: nowrap; }
+@media (max-width: 600px) {
+  .usage { padding: 16px; }
+  .page-topbar { gap: 8px; }
+  .page-topbar .brand span { display: none; }
+  .page-topbar .btn { padding: 8px 12px; white-space: nowrap; }
+}
